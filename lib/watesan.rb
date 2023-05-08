@@ -2,7 +2,9 @@
 
 require_relative 'watesan/version'
 
+require 'watesan/fixed_window'
+require 'watesan/ping'
+
 module Watesan
   class Error < StandardError; end
-  # Your code goes here...
 end
