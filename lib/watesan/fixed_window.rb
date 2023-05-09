@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
-require 'redis'
-require 'constants'
+require 'watesan/abstract'
 
-class Watesan::FixedWindow
+class Watesan::FixedWindow < Watesan::Abstract
   def initialize(key:, options: Constants::DEFAULT_TORQUE_OPTIONS, redis_options: Constants::DEFAULT_REDIS_OPTIONS)
+    init(redis_options, options)
     @key = key
-    torque_options = Constants::DEFAULT_TORQUE_OPTIONS.dup
-    @options = torque_options.merge!(options)
-    @redis = Redis.new(redis_options)
   end
 
   # TODO: return with message
