@@ -20,6 +20,8 @@ RSpec/FilePath:
   Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
+RSpec/ExampleLength:
+  Max: 15
 
 Bundler/InsecureProtocolSource:
   Enabled: true

@@ -2,8 +2,6 @@
 
 require 'redis'
 require 'watesan'
-require 'debug'
-require 'constants'
 
 RSpec.describe Watesan::FixedWindow do
   let(:redis_url) { 'redis://localhost:6379' }

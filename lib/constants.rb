@@ -21,4 +21,10 @@ class Constants
     port: DEFAULT_REDIS_PORT
   }.freeze
   public_constant :DEFAULT_REDIS_OPTIONS
+
+  DEFAULT_TORQUE_OPTIONS = {
+    window_size:  Constants::DEFAULT_WINDOW_SIZE,
+    max_requests: Constants::DEFAULT_MAX_REQUEST
+  }.freeze
+  public_constant :DEFAULT_TORQUE_OPTIONS
 end

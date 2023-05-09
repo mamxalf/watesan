@@ -4,28 +4,22 @@ require 'redis'
 require 'constants'
 
 class Watesan::FixedWindow
-  DEFAULT_OPTIONS = {
-    window_size:  Constants::DEFAULT_WINDOW_SIZE,
-    max_requests: Constants::DEFAULT_MAX_REQUEST
-  }.freeze
-
-  private_constant :DEFAULT_OPTIONS
-
-  def initialize(key: nil, options: DEFAULT_OPTIONS, redis_options: Constants::DEFAULT_REDIS_OPTIONS)
+  def initialize(key:, options: Constants::DEFAULT_TORQUE_OPTIONS, redis_options: Constants::DEFAULT_REDIS_OPTIONS)
     @key = key
-    fix_options = DEFAULT_OPTIONS.dup
-    @options = fix_options.merge!(options)
+    torque_options = Constants::DEFAULT_TORQUE_OPTIONS.dup
+    @options = torque_options.merge!(options)
     @redis = Redis.new(redis_options)
   end
 
+  # TODO: return with message
   def call
     requests = @redis.get(@key).to_i
-    if requests >= @options[:window_size]
+    if requests >= @options[:max_requests]
       true
     else
       @redis.multi do |multi|
         multi.incr(@key)
-        multi.expire(@key, @options[:max_requests])
+        multi.expire(@key, @options[:window_size])
       end
       false
     end
