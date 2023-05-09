@@ -8,7 +8,7 @@ class Watesan::FixedWindow < Watesan::Abstract
     @key = key
   end
 
-  # TODO: return with message
+  # TODO: return with message, and handling error
   def call
     requests = @redis.get(@key).to_i
     if requests >= @options[:max_requests]
